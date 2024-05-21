@@ -24,3 +24,16 @@ What is JEE?
 CONTEXT:
 {context}""".format(context = document)
 ```
+8. Now you can add your custom prompt by modifying the quickstart code.
+```python
+completion = client.chat.completions.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "You are a helpful assistant that provides answers to user questions based on a given source context document."},
+    {"role": "user", "content": PROMPT}
+  ]
+)
+print(completion.choices[0].message)
+```
+
+Points *7* & *8* show the basics of creating a Retrieval Augmented Generation ( RAG ) chatbot. In a production system, the variable `document` can be programmed to store content from a knowledge base that most accurately answers user questions. The contents of `document` can be injected into a prompt ( see the `PROMPT` variable ). The prompt asks the chat endpoint to answer the user question using the `document` variable's content as the source.
